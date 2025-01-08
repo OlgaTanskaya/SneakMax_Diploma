@@ -1,0 +1,69 @@
+:global {
+  .noUi {
+    &-target {
+      width: 100%;
+      background: none;
+      border: none;
+      position: relative;
+    }
+
+    &-horizontal {
+      height: 2px;
+      background-color: #444b58;
+    }
+
+    &-connect {
+      background: #444b58;
+      height: 2px;
+    }
+
+    &-handle {
+      width: 8px !important; 
+      height: 20px; 
+      background-color: #444b58;
+      border-radius: 2px;
+      box-shadow: none;
+      border: none;
+      top: -9px !important;
+      right: -4px !important;
+
+      &::before {
+        content: none; 
+      }
+
+      &::after {
+        content: none;
+      }
+    }
+  }
+}
+
+.priceFilter {
+  font-size: 16px;
+  margin-bottom: 29px;
+  display: flex;
+  flex-direction: column;
+
+  .filter {
+    border-radius: 4px;
+    border: 1px solid #b2b5bb;
+    width: 100%;
+    position: relative;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 50%;
+      transform: translate(-50%, -50%);
+      width: 1px;
+      height: 34px;
+      background-color: #b2b5bb;
+    }
+
+    input {
+      max-width: 120px;
+      text-align: center;
+    }
+  }
+}
