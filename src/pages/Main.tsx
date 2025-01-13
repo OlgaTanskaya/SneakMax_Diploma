@@ -7,7 +7,6 @@ import { About } from "../components/about/About";
 import { Slider } from "../components/slider/Slider";
 import { Team } from "../components/team/Team";
 import { Contacts } from "../components/contacts/Contacts";
-
 import { Questions } from "../components/questions/Questions";
 import { Bottom } from "../components/bottom/Bottom";
 import BasketBlock from "../components/basketBlock/BasketBlock";

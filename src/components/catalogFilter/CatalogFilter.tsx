@@ -23,7 +23,7 @@ export interface IFormData {
 const CatalogFilter: FC<IProps> = ({ setGender }) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const { register, handleSubmit, setValue } = useForm<IFormData>({
+  const { register, handleSubmit, setValue, reset } = useForm<IFormData>({
     defaultValues: {
       startPrice: 0,
       endPrice: 99999,
@@ -44,6 +44,11 @@ const CatalogFilter: FC<IProps> = ({ setGender }) => {
     );
   };
 
+  const handleReset = () => {
+    window.location.hash = "#catalog";
+    window.location.reload();
+  };
+
   return (
     <form className={styles.catalogFilter} onSubmit={handleSubmit(onSubmit)}>
       <div>
@@ -55,12 +60,7 @@ const CatalogFilter: FC<IProps> = ({ setGender }) => {
       <button type="submit" onClick={() => dispatch(getBaseLimit())}>
         Применить
       </button>
-      <button
-        type="reset"
-        onClick={() =>
-          onSubmit({ startPrice: 0, endPrice: 99999, gender: "", sizes: [0] })
-        }
-      >
+      <button type="button" onClick={handleReset}>
         Сбросить
       </button>
     </form>

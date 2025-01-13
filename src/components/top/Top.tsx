@@ -1,7 +1,16 @@
 import React from "react";
 import styles from "./Top.module.scss";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 export const Top: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleNavigation = (id: string, route?: string) => {
+    if (route !== window.location.pathname) {
+      navigate(`${route}#${id}`);
+    } else {
+      window.location.hash = id;
+    }
+  };
   return (
     <div className={styles.bannerWrapper}>
       <div className="container">
@@ -13,9 +22,13 @@ export const Top: React.FC = () => {
             Мы продаем кроссовки брендов Nike, Adidas, Puma, Reebok, Converse и
             многие другие по низким ценам
           </p>
-          <NavLink to="/">
-            <button className={styles.button}>Перейти к покупкам</button>
-          </NavLink>
+
+          <button
+            onClick={() => handleNavigation("catalog", "/")}
+            className={styles.button}
+          >
+            Перейти к покупкам
+          </button>
         </div>
         <div className={styles.backgroundText}>SneakMax</div>
       </div>

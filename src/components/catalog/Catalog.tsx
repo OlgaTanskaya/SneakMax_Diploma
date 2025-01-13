@@ -5,7 +5,6 @@ import styles from "./Catalog.module.scss";
 
 export const Catalog = () => {
   const [gender, setGender] = useState<string>("");
-
   return (
     <section className={styles.catalogBlock} id="catalog">
       <div className="container">

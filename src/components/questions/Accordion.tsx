@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Accordion.module.scss";
 import plus from "../../assets/plus.svg";
+
 interface AccordionItemProps {
   title: string;
   content: string;

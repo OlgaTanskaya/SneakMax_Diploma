@@ -1,5 +1,5 @@
 import { FC, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+
 import BasketList from "../basketList/BasketList";
 import styles from "./PageBasketBlock.module.scss";
 import {
@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "../modal/Modal";
 import { useForm, SubmitHandler } from "react-hook-form";
 import basketArrow from "../../assets/basket_arrow.svg";
-
+import { useNavigate } from "react-router-dom";
 interface FormValues {
   name: string;
   phone: string;
@@ -20,6 +20,7 @@ interface FormValues {
 }
 
 export const PageBasketBlock: FC = () => {
+  const navigate = useNavigate();
   const { register, handleSubmit } = useForm<FormValues>();
   const [isOpen, setIsOpen] = useState(true);
   const dispatch = useDispatch();
@@ -40,8 +41,12 @@ export const PageBasketBlock: FC = () => {
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     console.log("Form Data:", data);
     console.log("products:", products);
+    resetForm();
   };
-
+  const resetForm = () => {
+    alert("Спасибо за заказ! Мы перезвоним Вам через 15 минут.");
+    navigate("/");
+  };
   const toggleAccordion = () => {
     setIsOpen(!isOpen);
   };

@@ -34,7 +34,6 @@ const CatalogItems: FC<IProps> = ({ gender }) => {
   }, [dispatch, gender, limit]);
 
   useEffect(() => {
-    
     const match = location.pathname.match(/product\/(\d+)/);
     if (match) {
       const productId = Number(match[1]);
@@ -49,6 +48,9 @@ const CatalogItems: FC<IProps> = ({ gender }) => {
       }
     }
   }, [location.pathname, sneakers, dispatch]);
+
+  const isLimitReached = limit >= sneakers.length;
+
   return (
     <div className={styles.catalogItems}>
       <ul>
@@ -63,9 +65,9 @@ const CatalogItems: FC<IProps> = ({ gender }) => {
         className={styles.btn}
         type="button"
         onClick={() => dispatch(changeLimit())}
-        disabled={limit >= sneakers.length}
+        disabled={isLimitReached}
       >
-        Показать еще
+        {isLimitReached ? "Товара больше нет" : "Показать еще"}
       </button>
     </div>
   );

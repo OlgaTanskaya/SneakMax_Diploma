@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./ProductBlock.module.scss";
 import {
   setIsProductOpen,
@@ -7,7 +7,6 @@ import {
 import { RootState } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "../modal/Modal";
-import { useForm, SubmitHandler } from "react-hook-form";
 import productArrow from "../../assets/product_arrow.svg";
 
 interface FormValues {

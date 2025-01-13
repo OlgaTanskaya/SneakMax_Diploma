@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import styles from "./Slider.module.scss";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Slide1 } from "./Slide1";
 import { Slide2 } from "./Slide2";
@@ -13,6 +12,7 @@ export interface ISliderFormData {
   sizes?: string[];
   comment?: string | null;
 }
+
 export const Slider: React.FC = () => {
   const swiperRef = useRef<any>(null);
 
@@ -21,15 +21,25 @@ export const Slider: React.FC = () => {
       swiperRef.current.swiper.slideNext();
     }
   };
-  const { register, handleSubmit, setValue, watch } = useForm<ISliderFormData>({
-    defaultValues: {
-      checkboxes: Array(6).fill(false),
-      sizes: [],
-      comment: null,
-    },
-  });
+
+  const { register, handleSubmit, setValue, watch, reset } =
+    useForm<ISliderFormData>({
+      defaultValues: {
+        checkboxes: Array(6).fill(false),
+        sizes: [],
+        comment: null,
+      },
+    });
+  const resetForm = () => {
+    window.location.hash = "#slider";
+
+    window.location.reload();
+  };
+
   const onSubmit: SubmitHandler<ISliderFormData> = (data) => {
     console.log("Form Submitted:", data);
+
+    resetForm();
   };
 
   return (

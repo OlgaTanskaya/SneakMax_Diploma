@@ -4,8 +4,9 @@ import styles from "./Contacts.module.scss";
 import vk from "../../assets/vk.svg";
 import inst from "../../assets/inst.svg";
 import { Tooltip } from "./Tooltip";
+
 export const Contacts: React.FC = () => {
-  const mapCenter = [59.9342802, 30.3350986]; // Санкт-Петербург
+  const mapCenter = [59.9342802, 30.3350986]; 
 
   const placemarks = [
     { coords: [59.9386, 30.3141], title: "Метка 1" },

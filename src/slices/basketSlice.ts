@@ -2,16 +2,16 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 
 export interface ISneakers {
-  color: string; 
+  color: string;
   compound: string;
   country: string;
   description: string;
-  gender: string; 
+  gender: string;
   id: number;
   imgUrl: string;
   inStock: number;
   oldPrice: number;
-  price: number; 
+  price: number;
   sizes: number[];
   stars: number;
   title: string;
@@ -23,52 +23,45 @@ const BASE_URL: string = "https://91e76ca43b25a69c.mokky.dev";
 export const fetchBasket = createAsyncThunk<ISneakers[]>(
   "basket/fetchBasket",
   async (): Promise<ISneakers[]> => {
-  
     try {
-     
       const { data } = await axios.get<ISneakers[]>(`${BASE_URL}/basket/`);
 
-      return data; 
+      return data;
     } catch (error) {
-      console.log("Failed to fetch:"); 
-      return []; 
+      console.log("Failed to fetch:");
+      return [];
     }
   }
 );
-
 
 export const postBasket = createAsyncThunk<ISneakers, ISneakers>(
-  "basket/postBasket", 
+  "basket/postBasket",
   async (item) => {
-    
     try {
-      
       const { data } = await axios.post(`${BASE_URL}/basket`, item);
       console.log(data);
-      return data; 
+      return data;
     } catch (error) {
-      throw new Error("Failed to post basket"); 
+      throw new Error("Failed to post basket");
     }
   }
 );
 
-export const delBasket = createAsyncThunk<number, number>(
-  "basket/delBasket", 
+export const delBasket = createAsyncThunk<any, any>(
+  "basket/delBasket",
   async (id) => {
-    
     try {
-      
       await axios.delete(`${BASE_URL}/basket/${id}`);
 
-      return id; 
+      return id;
     } catch (error) {
-      throw new Error("Failed to delete basket"); 
+      throw new Error("Failed to delete basket");
     }
   }
 );
 
 interface IState {
-  data: ISneakers[]; 
+  data: ISneakers[];
   isOpen: boolean;
   isPageOpen: boolean;
   isProductOpen: boolean;
@@ -78,7 +71,7 @@ interface IState {
 }
 
 const initialState: IState = {
-  data: [], 
+  data: [],
   isOpen: false,
   isPageOpen: true,
   isProductOpen: false,
@@ -88,8 +81,8 @@ const initialState: IState = {
 };
 
 export const basketSlice = createSlice({
-  name: "basket", 
-  initialState, 
+  name: "basket",
+  initialState,
   reducers: {
     setSelectedProduct(state, action: PayloadAction<ISneakers | null>) {
       state.selectedProduct = action.payload;
@@ -104,25 +97,24 @@ export const basketSlice = createSlice({
       state.isProductOpen = action.payload;
     },
     calculateTotalCount(state) {
-      state.totalCount = state.data.length; 
+      state.totalCount = state.data.length;
     },
-    
+
     calculateTotalPrice(state) {
       state.totalPrice = state.data.reduce((sum, item) => sum + item.price, 0);
     },
-  }, 
+  },
   extraReducers: (builder) => {
-    
     builder.addCase(fetchBasket.fulfilled, (state, action) => {
-      state.data = action.payload; 
+      state.data = action.payload;
     });
 
     builder.addCase(postBasket.fulfilled, (state, action) => {
-      state.data.push(action.payload); 
+      state.data.push(action.payload);
     });
 
     builder.addCase(delBasket.fulfilled, (state, action) => {
-      state.data = state.data.filter((el) => el.id !== action.payload); 
+      state.data = state.data.filter((el) => el.id !== action.payload);
     });
   },
 });

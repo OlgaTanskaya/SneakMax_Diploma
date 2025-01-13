@@ -27,6 +27,10 @@
   &:active {
     background-color: #8c2828;
   }
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
 }
 @media (max-width: 540px) {
   .catalogItems {
